@@ -16,12 +16,20 @@ function Square(props) {
         super(props);
         this.state = {
           squares: Array(9).fill(null),
+          xIsNext: true,
+
         };
       }
       handleClick(i) {
         const squares = this.state.squares.slice();
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+
         squares[i] = 'X';
-        this.setState({squares: squares});
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
+        
       }
     renderSquare(i) {
         return <Square value={this.state.squares[i]}
@@ -30,7 +38,7 @@ function Square(props) {
     }
   
     render() {
-      const status = 'Next player: X';
+        const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
   
       return (
         <div>
