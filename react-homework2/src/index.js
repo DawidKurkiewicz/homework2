@@ -4,21 +4,15 @@ import './index.css';
 
 
 class Square extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          value: null,
-        };
-      }
     render() {
-        return (
-            <button
-              className="square"
-              onClick={() => this.setState({value: 'X'})}
-            >
-              {this.state.value}
-            </button>
-          );
+      return (
+        <button
+          className="square"
+          onClick={() => this.props.onClick()}
+        >
+          {this.props.value}
+        </button>
+      );
     }
   }
   
@@ -30,7 +24,9 @@ class Square extends React.Component {
         };
       }
     renderSquare(i) {
-        return <Square value={i} />;
+        return <Square value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+        />;
     }
   
     render() {
