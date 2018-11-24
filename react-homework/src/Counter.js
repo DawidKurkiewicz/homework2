@@ -3,9 +3,20 @@ import Button from './Button'
 
 
 class Counter extends React.Component {
-    state = {
-        number: this.props.startNumber || 0
+    state = (JSON.parse(localStorage.getItem('Counter-state')) ||
+        {
+            number: this.props.startNumber || 0
+        }
+    )
+    componentDidUpdate() {
+        this.saveInLocalStorage()
     }
+
+    saveInLocalStorage = () => localStorage.setItem(
+        'Counter-state',
+        JSON.stringify(this.state)
+    )
+
     plusOneHandler = () => {
         this.setState({ number: this.state.number + 1 })
     }
@@ -33,7 +44,7 @@ class Counter extends React.Component {
                 />
                 <Button
                     onClick={this.minusOneHandler}
-                    label={'-'}
+                    label={'-1'}
                 />
                 <Button
                     onClick={this.plusFiveHandler}
